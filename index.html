@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influenciamos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#1E1E2D',
+                        darker: '#151521',
+                        primary: '#0D6EFD',
+                        secondary: '#6C757D',
+                        light: '#E9ECEF',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos personalizados */
+        .hover-card:hover {
+            border-color: #2D2D3D;
+            transition: all 0.2s;
+        }
+        .post-actions button:hover {
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1E1E2D;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2D2D3D;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-64 fixed h-full bg-dark border-r border-gray-800 p-6 hidden md:block">
+        <div class="mb-8">
+            <img src="logo.png" alt="Influenciamos Logo" class="h-12">
+        </div>
+        <nav class="space-y-4">
+            <a href="index.html" class="flex items-center py-2 font-medium text-white hover:text-primary">
+                <i class="fas fa-home mr-3 text-lg"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="discover.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-compass mr-3 text-lg"></i>
+                <span>Descubrir</span>
+            </a>
+            <a href="messages.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-envelope mr-3 text-lg"></i>
+                <span>Mensajes</span>
+            </a>
+            <a href="profile.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-user mr-3 text-lg"></i>
+                <span>Perfil</span>
+            </a>
+            <a href="login.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-sign-in-alt mr-3 text-lg"></i>
+                <span>Ingresar</span>
+            </a>
+            <div class="pt-8 border-t border-gray-800 mt-8">
+                <a href="#" class="flex items-center py-2 text-sm text-gray-400 hover:text-primary">
+                    <i class="fas fa-info-circle mr-3"></i>
+                    <span>Sobre nosotros</span>
+                </a>
+                <a href="#" class="flex items-center py-2 text-sm text-gray-400 hover:text-primary">
+                    <i class="fas fa-question-circle mr-3"></i>
+                    <span>Ayuda y Soporte</span>
+                </a>
+                <a href="#" class="flex items-center py-2 text-sm text-gray-400 hover:text-primary">
+                    <i class="fas fa-file-contract mr-3"></i>
+                    <span>Términos y condiciones</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Mobile Header -->
+    <div class="md:hidden fixed top-0 left-0 right-0 bg-dark border-b border-gray-800 p-4 z-10">
+        <div class="flex justify-between items-center">
+            <img src="logo.png" alt="Influenciamos Logo" class="h-8">
+            <button id="menuToggle" class="text-white">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden mt-4 pb-4">
+            <nav class="space-y-4">
+                <a href="index.html" class="flex items-center py-2 font-medium text-white">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="discover.html" class="flex items-center py-2 font-medium text-gray-400">
+                    <i class="fas fa-compass mr-3"></i>
+                    <span>Descubrir</span>
+                </a>
+                <a href="messages.html" class="flex items-center py-2 font-medium text-gray-400">
+                    <i class="fas fa-envelope mr-3"></i>
+                    <span>Mensajes</span>
+                </a>
+                <a href="profile.html" class="flex items-center py-2 font-medium text-gray-400">
+                    <i class="fas fa-user mr-3"></i>
+                    <span>Perfil</span>
+                </a>
+                <a href="login.html" class="flex items-center py-2 font-medium text-gray-400">
+                    <i class="fas fa-sign-in-alt mr-3"></i>
+                    <span>Ingresar</span>
+                </a>
+                <div class="pt-4 border-t border-gray-800 mt-4">
+                    <a href="#" class="flex items-center py-2 text-sm text-gray-400">
+                        <i class="fas fa-info-circle mr-3"></i>
+                        <span>Sobre nosotros</span>
+                    </a>
+                    <a href="#" class="flex items-center py-2 text-sm text-gray-400">
+                        <i class="fas fa-question-circle mr-3"></i>
+                        <span>Ayuda y Soporte</span>
+                    </a>
+                    <a href="#" class="flex items-center py-2 text-sm text-gray-400">
+                        <i class="fas fa-file-contract mr-3"></i>
+                        <span>Términos y condiciones</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 md:ml-64 p-4 md:p-8 mt-16 md:mt-0 custom-scrollbar">
+        <div class="max-w-3xl mx-auto">
+            <!-- Create Post -->
+            <div class="bg-dark border border-gray-800 rounded-lg p-4 mb-6 hover-card">
+                <div class="flex items-start space-x-3">
+                    <div class="w-10 h-10 rounded-full overflow-hidden bg-gray-700">
+                        <img src="profile-pic.png" alt="Tu perfil" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <textarea id="postContent" class="w-full bg-dark text-white border-none rounded-lg p-3 mb-3 focus:outline-none focus:ring-1 focus:ring-primary" placeholder="¿Qué quieres compartir?"></textarea>
+                        <div id="imagePreview" class="mt-3 hidden relative">
+                            <img id="previewImg" src="#" alt="Preview" class="max-h-64 rounded-lg w-full object-cover">
+                            <button id="removeImage" class="absolute top-2 right-2 bg-dark bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-100">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-800">
+                            <button class="p-2 text-primary rounded-full hover:bg-blue-900 hover:bg-opacity-20">
+                                <i class="far fa-image"></i>
+                                <input type="file" id="fileInput" class="hidden" accept="image/*">
+                            </button>
+                            <button id="publishButton" class="bg-primary hover:bg-blue-600 text-white font-medium py-2 px-5 rounded-full transition">
+                                Publicar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feed -->
+            <div id="feed" class="space-y-4">
+                <!-- Posts will be added here dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-dark border-t border-gray-800 py-2 z-10">
+        <div class="flex justify-around">
+            <a href="index.html" class="p-2 text-primary">
+                <i class="fas fa-home text-xl"></i>
+            </a>
+            <a href="discover.html" class="p-2 text-gray-400">
+                <i class="fas fa-compass text-xl"></i>
+            </a>
+            <a href="messages.html" class="p-2 text-gray-400">
+                <i class="fas fa-envelope text-xl"></i>
+            </a>
+            <a href="profile.html" class="p-2 text-gray-400">
+                <i class="fas fa-user text-xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle mobile menu
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // File input handling
+        document.querySelector('.fa-image').parentElement.addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewImg').src = e.target.result;
+                    document.getElementById('imagePreview').classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('removeImage').addEventListener('click', function() {
+            document.getElementById('fileInput').value = '';
+            document.getElementById('imagePreview').classList.add('hidden');
+        });
+
+        // Sample posts data
+        const posts = [
+            {
+                id: 1,
+                username: 'Marketing Pro',
+                profilePic: 'user1.png',
+                time: '2h',
+                content: 'Acabamos de lanzar una nueva campaña con Influenciamos! Resultados increíbles hasta ahora con un aumento del 45% en el engagement 🚀 #MarketingDigital #Influencers',
+                image: null,
+                likes: 124,
+                comments: 23,
+                isLiked: false
+            },
+            {
+                id: 2,
+                username: 'Tech Influencer',
+                profilePic: 'user2.png',
+                time: '5h',
+                content: 'Buscando marcas para colaborar en mi próxima serie de reseñas tecnológicas. Tengo más de 500K seguidores interesados en los últimos gadgets e innovaciones. ¡Envíame un mensaje si estás interesado! #TechPartnership',
+                image: null,
+                likes: 89,
+                comments: 34,
+                isLiked: false
+            },
+            {
+                id: 3,
+                username: 'Fashion Brand',
+                profilePic: 'user3.png',
+                time: '1d',
+                content: 'Nuestra colaboración con los principales influencers de moda a través de la plataforma Influenciamos ha generado un aumento del 78% en el tráfico del sitio web y un aumento del 35% en las ventas. Las capacidades de segmentación son increíbles. #ROI #InfluencerMarketing',
+                image: 'post1.jpg',
+                likes: 256,
+                comments: 42,
+                isLiked: false
+            }
+        ];
+
+        // Render posts
+        function renderPosts() {
+            const feed = document.getElementById('feed');
+            feed.innerHTML = '';
+            
+            posts.forEach(post => {
+                const postElement = document.createElement('article');
+                postElement.className = 'bg-dark border border-gray-800 rounded-lg p-4 hover-card';
+                postElement.setAttribute('data-post-id', post.id);
+                
+                let postHTML = `
+                    <div class="flex items-start space-x-3">
+                        <a href="profile.html?user=${post.username}" class="flex-shrink-0">
+                            <div class="w-10 h-10 rounded-full overflow-hidden bg-gray-700">
+                                <img src="${post.profilePic}" alt="${post.username}" class="w-full h-full object-cover">
+                            </div>
+                        </a>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <a href="profile.html?user=${post.username}" class="font-medium text-white hover:underline">${post.username}</a>
+                                    <span class="text-gray-400 text-sm ml-1">· ${post.time}</span>
+                                </div>
+                                <button class="text-gray-400 hover:text-white p-1">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="mt-2 text-white">
+                                <p>${formatContent(post.content)}</p>
+                            </div>
+                `;
+                
+                if (post.image) {
+                    postHTML += `
+                        <div class="mt-3">
+                            <img src="${post.image}" alt="Post image" class="w-full h-auto rounded-lg">
+                        </div>
+                    `;
+                }
+                
+                postHTML += `
+                            <div class="mt-3 flex space-x-6 text-gray-400 post-actions">
+                                <button class="flex items-center space-x-1 hover:text-red-500 like-btn" data-post-id="${post.id}">
+                                    <div class="p-1.5 rounded-full hover:bg-red-500 hover:bg-opacity-10">
+                                        <i class="${post.isLiked ? 'fas text-red-500' : 'far'} fa-heart"></i>
+                                    </div>
+                                    <span class="like-count">${post.likes}</span>
+                                </button>
+                                <button class="flex items-center space-x-1 hover:text-primary">
+                                    <div class="p-1.5 rounded-full hover:bg-blue-500 hover:bg-opacity-10">
+                                        <i class="far fa-comment"></i>
+                                    </div>
+                                    <span>${post.comments}</span>
+                                </button>
+                                <a href="messages.html?user=${post.username}" class="flex items-center space-x-1 hover:text-primary">
+                                    <div class="p-1.5 rounded-full hover:bg-blue-500 hover:bg-opacity-10">
+                                        <i class="far fa-envelope"></i>
+                                    </div>
+                                    <span>Mensaje</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                postElement.innerHTML = postHTML;
+                feed.appendChild(postElement);
+                
+                // Add event listener for like button
+                const likeBtn = postElement.querySelector('.like-btn');
+                likeBtn.addEventListener('click', function() {
+                    const postId = parseInt(this.getAttribute('data-post-id'));
+                    toggleLike(postId, this);
+                });
+                
+                // Add event listener for post click to go to post detail
+                postElement.addEventListener('click', function(e) {
+                    // Don't navigate if clicking on a button or link
+                    if (e.target.closest('button') || e.target.closest('a')) return;
+                    
+                    const postId = this.getAttribute('data-post-id');
+                    window.location.href = `post.html?id=${postId}`;
+                });
+            });
+        }
+
+        // Format content to make hashtags and mentions clickable
+        function formatContent(content) {
+            // Make hashtags clickable
+            content = content.replace(/#(\w+)/g, '<a href="discover.html?hashtag=$1" class="text-primary hover:underline">#$1</a>');
+            
+            return content;
+        }
+
+        // Toggle like
+        function toggleLike(postId, button) {
+            const post = posts.find(p => p.id === postId);
+            if (post) {
+                post.isLiked = !post.isLiked;
+                post.likes = post.isLiked ? post.likes + 1 : post.likes - 1;
+                
+                const heartIcon = button.querySelector('i');
+                const likeCount = button.querySelector('.like-count');
+                
+                if (post.isLiked) {
+                    heartIcon.classList.remove('far');
+                    heartIcon.classList.add('fas', 'text-red-500');
+                } else {
+                    heartIcon.classList.remove('fas', 'text-red-500');
+                    heartIcon.classList.add('far');
+                }
+                
+                likeCount.textContent = post.likes;
+            }
+        }
+
+        // Add new post
+        document.getElementById('publishButton').addEventListener('click', function() {
+            const content = document.getElementById('postContent').value.trim();
+            const fileInput = document.getElementById('fileInput');
+            let imageUrl = null;
+            
+            if (fileInput.files[0]) {
+                // En una aplicación real, subirías el archivo a un servidor
+                // Para esta demo, usaremos un placeholder
+                imageUrl = 'post3.jpg';
+            }
+            
+            if (!content && !imageUrl) return;
+            
+            // Agregar nueva publicación al inicio del array
+            posts.unshift({
+                id: posts.length + 1,
+                username: 'Tu Usuario',
+                profilePic: 'profile-pic.png',
+                time: 'Ahora',
+                content: content,
+                image: imageUrl,
+                likes: 0,
+                comments: 0,
+                isLiked: false
+            });
+            
+            // Limpiar el formulario
+            document.getElementById('postContent').value = '';
+            document.getElementById('fileInput').value = '';
+            document.getElementById('imagePreview').classList.add('hidden');
+            
+            // Volver a renderizar las publicaciones
+            renderPosts();
+        });
+
+        // Inicializar
+        renderPosts();
+    </script>
+</body>
+</html>
+

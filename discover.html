@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descubrir - Influenciamos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#1E1E2D',
+                        darker: '#151521',
+                        primary: '#0D6EFD',
+                        secondary: '#6C757D',
+                        light: '#E9ECEF',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos personalizados */
+        .hover-card:hover {
+            border-color: #2D2D3D;
+            transition: all 0.2s;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1E1E2D;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2D2D3D;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-64 fixed h-full bg-dark border-r border-gray-800 p-6 hidden md:block">
+        <div class="mb-8">
+            <img src="logo.png" alt="Influenciamos Logo" class="h-12">
+        </div>
+        <nav class="space-y-4">
+            <a href="index.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-home mr-3 text-lg"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="discover.html" class="flex items-center py-2 font-medium text-white hover:text-primary">
+                <i class="fas fa-compass mr-3 text-lg"></i>
+                <span>Descubrir</span>
+            </a>
+            <a href="messages.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-envelope mr-3 text-lg"></i>
+                <span>Mensajes</span>
+            </a>
+            <a href="profile.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-user mr-3 text-lg"></i>
+                <span>Perfil</span>
+            </a>
+            <a href="login.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-sign-in-alt mr-3 text-lg"></i>
+                <span>Ingresar</span>
+            </a>
+            <div class="pt-8 border-t border-gray-800 mt-8">
+                <a href="#" class="flex items-center py-2 text-sm text-gray-400 hover:text-primary">
+                    <i class="fas fa-info-circle mr-3"></i>
+                    <span>Sobre nosotros</span>
+                </a>
+                <a href="#" class="flex items-center py-2 text-sm text-gray-400 hover:text-primary">
+                    <i class="fas fa-question-circle mr-3"></i>
+                    <span>Ayuda y Soporte</span>
+                </a>
+                <a href="#" class="flex items-center py-2 text-sm text-gray-400 hover:text-primary">
+                    <i class="fas fa-file-contract mr-3"></i>
+                    <span>Términos y condiciones</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Mobile Header -->
+    <div class="md:hidden fixed top-0 left-0 right-0 bg-dark border-b border-gray-800 p-4 z-10">
+        <div class="flex justify-between items-center">
+            <img src="logo.png" alt="Influenciamos Logo" class="h-8">
+            <button id="menuToggle" class="text-white">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden mt-4 pb-4">
+            <nav class="space-y-4">
+                <a href="index.html" class="flex items-center py-2 font-medium text-gray-400">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="discover.html" class="flex items-center py-2 font-medium text-white">
+                    <i class="fas fa-compass mr-3"></i>
+                    <span>Descubrir</span>
+                </a>
+                <a href="messages.html" class="flex items-center py-2 font-medium text-gray-400">
+                    <i class="fas fa-envelope mr-3"></i>
+                    <span>Mensajes</span>
+                </a>
+                <a href="profile.html" class="flex items-center py-2 font-medium text-gray-400">
+                    <i class="fas fa-user mr-3"></i>
+                    <span>Perfil</span>
+                </a>
+                <a href="login.html" class="flex items-center py-2 font-medium text-gray-400">
+                    <i class="fas fa-sign-in-alt mr-3"></i>
+                    <span>Ingresar</span>
+                </a>
+                <div class="pt-4 border-t border-gray-800 mt-4">
+                    <a href="#" class="flex items-center py-2 text-sm text-gray-400">
+                        <i class="fas fa-info-circle mr-3"></i>
+                        <span>Sobre nosotros</span>
+                    </a>
+                    <a href="#" class="flex items-center py-2 text-sm text-gray-400">
+                        <i class="fas fa-question-circle mr-3"></i>
+                        <span>Ayuda y Soporte</span>
+                    </a>
+                    <a href="#" class="flex items-center py-2 text-sm text-gray-400">
+                        <i class="fas fa-file-contract mr-3"></i>
+                        <span>Términos y condiciones</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 md:ml-64 p-4 md:p-8 mt-16 md:mt-0 custom-scrollbar">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-2xl font-bold mb-6">Descubrir</h1>
+            
+            <!-- Search -->
+            <div class="mb-6">
+                <div class="relative">
+                    <input type="text" placeholder="Buscar usuarios, marcas o temas" class="w-full bg-gray-800 border-none rounded-lg py-3 pl-10 pr-4 text-white focus:outline-none focus:ring-1 focus:ring-primary">
+                    <i class="fas fa-search absolute left-3 top-3.5 text-gray-400"></i>
+                </div>
+            </div>
+            
+            <!-- Categories -->
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold mb-4">Categorías</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <a href="#" class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 text-center hover-card">
+                        <i class="fas fa-shopping-bag text-2xl mb-2 text-primary"></i>
+                        <p>Moda</p>
+                    </a>
+                    <a href="#" class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 text-center hover-card">
+                        <i class="fas fa-utensils text-2xl mb-2 text-primary"></i>
+                        <p>Gastronomía</p>
+                    </a>
+                    <a href="#" class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 text-center hover-card">
+                        <i class="fas fa-laptop text-2xl mb-2 text-primary"></i>
+                        <p>Tecnología</p>
+                    </a>
+                    <a href="#" class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 text-center hover-card">
+                        <i class="fas fa-plane text-2xl mb-2 text-primary"></i>
+                        <p>Viajes</p>
+                    </a>
+                    <a href="#" class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 text-center hover-card">
+                        <i class="fas fa-dumbbell text-2xl mb-2 text-primary"></i>
+                        <p>Fitness</p>
+                    </a>
+                    <a href="#" class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 text-center hover-card">
+                        <i class="fas fa-palette text-2xl mb-2 text-primary"></i>
+                        <p>Arte</p>
+                    </a>
+                    <a href="#" class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 text-center hover-card">
+                        <i class="fas fa-gamepad text-2xl mb-2 text-primary"></i>
+                        <p>Gaming</p>
+                    </a>
+                    <a href="#" class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 text-center hover-card">
+                        <i class="fas fa-ellipsis-h text-2xl mb-2 text-primary"></i>
+                        <p>Más</p>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Popular Users -->
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold mb-4">Usuarios Populares</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="popularUsers">
+                    <!-- Users will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-dark border-t border-gray-800 py-2 z-10">
+        <div class="flex justify-around">
+            <a href="index.html" class="p-2 text-gray-400">
+                <i class="fas fa-home text-xl"></i>
+            </a>
+            <a href="discover.html" class="p-2 text-primary">
+                <i class="fas fa-compass text-xl"></i>
+            </a>
+            <a href="messages.html" class="p-2 text-gray-400">
+                <i class="fas fa-envelope text-xl"></i>
+            </a>
+            <a href="profile.html" class="p-2 text-gray-400">
+                <i class="fas fa-user text-xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle mobile menu
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Sample users data
+        const users = [
+            {
+                id: 1,
+                username: 'Fashion Influencer',
+                type: 'Influencer',
+                category: 'Moda',
+                profilePic: 'user1.png'
+            },
+            {
+                id: 2,
+                username: 'Tech Reviewer',
+                type: 'Influencer',
+                category: 'Tecnología',
+                profilePic: 'user2.png'
+            },
+            {
+                id: 3,
+                username: 'Food Lover',
+                type: 'Influencer',
+                category: 'Gastronomía',
+                profilePic: 'user3.png'
+            },
+            {
+                id: 4,
+                username: 'Travel Brand',
+                type: 'Marca',
+                category: 'Viajes',
+                profilePic: 'user4.png'
+            },
+            {
+                id: 5,
+                username: 'Sports Company',
+                type: 'Marca',
+                category: 'Fitness',
+                profilePic: 'user5.png'
+            },
+            {
+                id: 6,
+                username: 'Beauty Brand',
+                type: 'Marca',
+                category: 'Belleza',
+                profilePic: 'user6.png'
+            }
+        ];
+
+        // Render popular users
+        function renderUsers() {
+            const usersContainer = document.getElementById('popularUsers');
+            usersContainer.innerHTML = '';
+            
+            users.forEach(user => {
+                const userElement = document.createElement('div');
+                userElement.className = 'bg-gray-800 rounded-lg p-4 flex items-center hover-card';
+                
+                userElement.innerHTML = `
+                    <a href="profile.html?user=${user.username}" class="flex-shrink-0 mr-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-gray-700">
+                            <img src="${user.profilePic}" alt="${user.username}" class="w-full h-full object-cover">
+                        </div>
+                    </a>
+                    <div class="flex-grow">
+                        <a href="profile.html?user=${user.username}" class="font-medium hover:underline">${user.username}</a>
+                        <div class="text-sm text-gray-400">${user.type} · ${user.category}</div>
+                    </div>
+                    <a href="messages.html?user=${user.username}" class="text-primary hover:bg-blue-900 hover:bg-opacity-20 p-2 rounded-full">
+                        <i class="far fa-envelope"></i>
+                    </a>
+                `;
+                
+                usersContainer.appendChild(userElement);
+            });
+        }
+
+        // Initial render
+        renderUsers();
+    </script>
+</body>
+</html>
+

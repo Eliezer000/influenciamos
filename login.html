@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar - Influenciamos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#1E1E2D',
+                        darker: '#151521',
+                        primary: '#0D6EFD',
+                        secondary: '#6C757D',
+                        light: '#E9ECEF',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hover-card:hover {
+            border-color: #2D2D3D;
+            transition: all 0.2s;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-md mx-auto">
+            <div class="text-center mb-8">
+                <img src="logo.png" alt="Influenciamos Logo" class="h-12 mx-auto mb-6">
+                <h1 class="text-2xl font-bold">Ingresar a Influenciamos</h1>
+                <p class="text-gray-400 mt-2">Conecta con marcas e influencers</p>
+            </div>
+            
+            <div class="bg-dark border border-gray-800 rounded-lg p-6 hover-card">
+                <!-- Login Form -->
+                <div id="loginForm">
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-400 mb-1">
+                            <i class="fas fa-envelope mr-2"></i>Email
+                        </label>
+                        <input type="email" id="email" class="w-full bg-gray-800 border-none rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-1 focus:ring-primary">
+                    </div>
+                    <div class="mb-6">
+                        <label for="password" class="block text-sm font-medium text-gray-400 mb-1">
+                            <i class="fas fa-lock mr-2"></i>Contraseña
+                        </label>
+                        <input type="password" id="password" class="w-full bg-gray-800 border-none rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-1 focus:ring-primary">
+                        <div class="flex justify-end mt-1">
+                            <a href="#" class="text-sm text-primary hover:underline">¿Olvidaste tu contraseña?</a>
+                        </div>
+                    </div>
+                    <button id="loginButton" class="w-full bg-primary hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg mb-4 transition">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Ingresar
+                    </button>
+                    <div class="text-center">
+                        <p class="text-gray-400">¿No tienes una cuenta? <a href="#" id="showSignup" class="text-primary hover:underline">Regístrate</a></p>
+                    </div>
+                </div>
+                
+                <!-- Signup Form (hidden by default) -->
+                <div id="signupForm" class="hidden">
+                    <div class="mb-4">
+                        <label for="signupName" class="block text-sm font-medium text-gray-400 mb-1">
+                            <i class="fas fa-user mr-2"></i>Nombre completo
+                        </label>
+                        <input type="text" id="signupName" class="w-full bg-gray-800 border-none rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-1 focus:ring-primary">
+                    </div>
+                    <div class="mb-4">
+                        <label for="signupEmail" class="block text-sm font-medium text-gray-400 mb-1">
+                            <i class="fas fa-envelope mr-2"></i>Email
+                        </label>
+                        <input type="email" id="signupEmail" class="w-full bg-gray-800 border-none rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-1 focus:ring-primary">
+                    </div>
+                    <div class="mb-4">
+                        <label for="signupPassword" class="block text-sm font-medium text-gray-400 mb-1">
+                            <i class="fas fa-lock mr-2"></i>Contraseña
+                        </label>
+                        <input type="password" id="signupPassword" class="w-full bg-gray-800 border-none rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-1 focus:ring-primary">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-400 mb-2">
+                            <i class="fas fa-user-tag mr-2"></i>Tipo de cuenta
+                        </label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="accountType" value="influencer" class="mr-2 text-primary focus:ring-primary">
+                                <span>Influencer</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="accountType" value="brand" class="mr-2 text-primary focus:ring-primary">
+                                <span>Marca</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button id="signupButton" class="w-full bg-primary hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg mb-4 transition">
+                        <i class="fas fa-user-plus mr-2"></i>Registrarse
+                    </button>
+                    <div class="text-center">
+                        <p class="text-gray-400">¿Ya tienes una cuenta? <a href="#" id="showLogin" class="text-primary hover:underline">Ingresar</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between login and signup forms
+        document.getElementById('showSignup').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('signupForm').classList.remove('hidden');
+        });
+
+        document.getElementById('showLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('signupForm').classList.add('hidden');
+            document.getElementById('loginForm').classList.remove('hidden');
+        });
+
+        // Login form submission
+        document.getElementById('loginButton').addEventListener('click', function() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // In a real app, you would send this data to your server
+            console.log('Login attempt:', { email, password });
+            
+            // For demo purposes, redirect to home page
+            window.location.href = 'index.html';
+        });
+
+        // Signup form submission
+        document.getElementById('signupButton').addEventListener('click', function() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const accountType = document.querySelector('input[name="accountType"]:checked')?.value;
+            
+            // In a real app, you would send this data to your server
+            console.log('Signup attempt:', { name, email, password, accountType });
+            
+            // For demo purposes, redirect to home page
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
+

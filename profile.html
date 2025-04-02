@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Influenciamos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#1E1E2D',
+                        darker: '#151521',
+                        primary: '#0D6EFD',
+                        secondary: '#6C757D',
+                        light: '#E9ECEF',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos personalizados */
+        .hover-card:hover {
+            border-color: #2D2D3D;
+            transition: all 0.2s;
+        }
+        .post-actions button:hover {
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1E1E2D;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2D2D3D;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-64 fixed h-full bg-dark border-r border-gray-800 p-6 hidden md:block">
+        <div class="mb-8">
+            <img src="logo.png" alt="Influenciamos Logo" class="h-12">
+        </div>
+        <nav class="space-y-4">
+            <a href="index.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-home mr-3 text-lg"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="discover.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-compass mr-3 text-lg"></i>
+                <span>Descubrir</span>
+            </a>
+            <a href="messages.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-envelope mr-3 text-lg"></i>
+                <span>Mensajes</span>
+            </a>
+            <a href="profile.html" class="flex items-center py-2 font-medium text-white hover:text-primary">
+                <i class="fas fa-user mr-3 text-lg"></i>
+                <span>Perfil</span>
+            </a>
+            <a href="login.html" class="flex items-center py-2 font-medium text-gray-400 hover:text-primary">
+                <i class="fas fa-sign-in-alt mr-3 text-lg"></i>
+                <span>Ingresar</span>
+            </a>
+            <div class="pt-8 border-t border-gray-800 mt-8">
+                <a href="#" class="flex items-center py-2 text-sm text-gray-400 hover:text-primary">
+                    <i class="fas fa-info-circle mr-3"></i>
+                    <span>Sobre nosotros</span>
+                </a>
+                <a href="#" class="flex items-center py-2 text-sm text-gray-400 hover:text-primary">
+                    <i class="fas fa-question-circle mr-3"></i>
+                    <span>Ayuda y Soporte</span>
+                </a>
+                <a href="#" class="flex items-center py-2 text-sm text-gray-400 hover:text-primary">
+                    <i class="fas fa-file-contract mr-3"></i>
+                    <span>Términos y condiciones</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Mobile Header -->
+    <div class="md:hidden fixed top-0 left-0 right-0 bg-dark border-b border-gray-800 p-4 z-10">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center">
+                <button id="menuToggle" class="text-white mr-4">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <img src="logo.png" alt="Influenciamos Logo" class="h-8">
+            </div>
+            <a href="profile.html" class="w-8 h-8 rounded-full overflow-hidden bg-gray-700">
+                <img src="profile-pic.png" alt="Tu perfil" class="w-full h-full object-cover">
+            </a>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden mt-4 pb-4 border-t border-gray-800 pt-4">
+            <nav class="space-y-4">
+                <a href="index.html" class="flex items-center py-2 text-gray-400">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="discover.html" class="flex items-center py-2 text-gray-400">
+                    <i class="fas fa-compass mr-3"></i>
+                    <span>Descubrir</span>
+                </a>
+                <a href="messages.html" class="flex items-center py-2 text-gray-400">
+                    <i class="fas fa-envelope mr-3"></i>
+                    <span>Mensajes</span>
+                </a>
+                <a href="profile.html" class="flex items-center py-2 text-white">
+                    <i class="fas fa-user mr-3"></i>
+                    <span>Perfil</span>
+                </a>
+                <a href="login.html" class="flex items-center py-2 text-gray-400">
+                    <i class="fas fa-sign-in-alt mr-3"></i>
+                    <span>Ingresar</span>
+                </a>
+                <div class="pt-4 border-t border-gray-800 mt-4">
+                    <a href="#" class="flex items-center py-2 text-sm text-gray-400">
+                        <i class="fas fa-info-circle mr-3"></i>
+                        <span>Sobre nosotros</span>
+                    </a>
+                    <a href="#" class="flex items-center py-2 text-sm text-gray-400">
+                        <i class="fas fa-question-circle mr-3"></i>
+                        <span>Ayuda y Soporte</span>
+                    </a>
+                    <a href="#" class="flex items-center py-2 text-sm text-gray-400">
+                        <i class="fas fa-file-contract mr-3"></i>
+                        <span>Términos y condiciones</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 md:ml-64 min-h-screen custom-scrollbar">
+        <div class="max-w-3xl mx-auto">
+            <!-- Header -->
+            <header class="sticky top-0 z-10 bg-dark bg-opacity-80 backdrop-blur-sm">
+                <div class="px-4 py-3 flex items-center">
+                    <a href="javascript:history.back()" class="mr-6">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <div>
+                        <h1 id="profileName" class="text-xl font-bold">Cargando perfil...</h1>
+                        <p id="profilePostCount" class="text-gray-500 text-sm">0 publicaciones</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Profile Header -->
+            <div class="border-b border-gray-800">
+                <!-- Profile Info -->
+                <div class="px-4 py-6">
+                    <div class="flex items-center">
+                        <div class="w-24 h-24 rounded-full overflow-hidden bg-gray-700 mr-4">
+                            <img id="profileImage" src="profile-pic.png" alt="Foto de perfil" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h1 id="profileFullName" class="text-2xl font-bold">Nombre de Usuario</h1>
+                            <div class="mt-3">
+                                <a href="messages.html" id="messageButton" class="border border-gray-600 text-white font-medium py-2 px-4 rounded-full hover:bg-gray-800">
+                                    <i class="far fa-envelope mr-2"></i>Mensaje
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Content -->
+            <div id="profileContent">
+                <!-- Posts Tab (default) -->
+                <div id="postsTab" class="divide-y divide-gray-800">
+                    <!-- Posts will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-dark border-t border-gray-800 py-2 z-10">
+        <div class="flex justify-around">
+            <a href="index.html" class="p-2 text-gray-400">
+                <i class="fas fa-home text-xl"></i>
+            </a>
+            <a href="discover.html" class="p-2 text-gray-400">
+                <i class="fas fa-compass text-xl"></i>
+            </a>
+            <a href="messages.html" class="p-2 text-gray-400">
+                <i class="fas fa-envelope text-xl"></i>
+            </a>
+            <a href="profile.html" class="p-2 text-primary">
+                <i class="fas fa-user text-xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle mobile menu
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Get user from URL
+        function getUserFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('user') || 'Tu Usuario'; // Default to current user if not specified
+        }
+
+        // Sample users data
+        const users = {
+            'Tu Usuario': {
+                fullName: 'Tu Usuario',
+                profilePic: 'profile-pic.png',
+                postCount: 3,
+                isCurrentUser: true
+            },
+            'Marketing Pro': {
+                fullName: 'Marketing Pro',
+                profilePic: 'user1.png',
+                postCount: 42,
+                isCurrentUser: false
+            },
+            'Tech Influencer': {
+                fullName: 'Tech Influencer',
+                profilePic: 'user2.png',
+                postCount: 87,
+                isCurrentUser: false
+            },
+            'Fashion Brand': {
+                fullName: 'Fashion Brand',
+                profilePic: 'user3.png',
+                postCount: 112,
+                isCurrentUser: false
+            }
+        };
+
+        // Sample posts data
+        const posts = [
+            {
+                id: 1,
+                username: 'Tu Usuario',
+                profilePic: 'profile-pic.png',
+                time: '2h',
+                content: 'Acabo de publicar un nuevo artículo sobre cómo las marcas pueden aprovechar al máximo sus colaboraciones con influencers. ¡Échale un vistazo! #InfluencerMarketing #Estrategia',
+                image: null,
+                likes: 45,
+                comments: 12,
+                isLiked: false
+            },
+            {
+                id: 2,
+                username: 'Tu Usuario',
+                profilePic: 'profile-pic.png',
+                time: '1d',
+                content: 'Estoy buscando marcas interesadas en una colaboración para mi próxima campaña. Si representas a una marca de tecnología o estilo de vida, ¡contáctame por mensaje!',
+                image: null,
+                likes: 78,
+                comments: 23,
+                isLiked: false
+            },
+            {
+                id: 3,
+                username: 'Tu Usuario',
+                profilePic: 'profile-pic.png',
+                time: '3d',
+                content: 'Mi última colaboración con Tech Influencer fue todo un éxito. Aumentamos el engagement en un 65% y las conversiones en un 32%. ¡Gracias a todo el equipo por hacer que esto suceda! #CaseStudy #Marketing',
+                image: 'post1.jpg',
+                likes: 124,
+                comments: 34,
+                isLiked: false
+            },
+            {
+                id: 4,
+                username: 'Marketing Pro',
+                profilePic: 'user1.png',
+                time: '2h',
+                content: 'Acabamos de lanzar una nueva campaña con Influenciamos! Resultados increíbles hasta ahora con un aumento del 45% en el engagement 🚀 #MarketingDigital #Influencers',
+                image: null,
+                likes: 124,
+                comments: 23,
+                isLiked: false
+            },
+            {
+                id: 5,
+                username: 'Tech Influencer',
+                profilePic: 'user2.png',
+                time: '5h',
+                content: 'Buscando marcas para colaborar en mi próxima serie de reseñas tecnológicas. Tengo más de 500K seguidores interesados en los últimos gadgets e innovaciones. ¡Envíame un mensaje si estás interesado! #TechPartnership',
+                image: 'post2.jpg',
+                likes: 89,
+                comments: 34,
+                isLiked: false
+            }
+        ];
+
+        // Load profile data
+        function loadProfile() {
+            const username = getUserFromURL();
+            const user = users[username];
+            
+            if (!user) {
+                // Handle user not found
+                document.getElementById('profileName').textContent = 'Usuario no encontrado';
+                return;
+            }
+            
+            // Update profile header
+            document.getElementById('profileName').textContent = user.fullName;
+            document.getElementById('profilePostCount').textContent = `${user.postCount} publicaciones`;
+            document.getElementById('profileFullName').textContent = user.fullName;
+            document.getElementById('profileImage').src = user.profilePic;
+            
+            // Update message button
+            if (user.isCurrentUser) {
+                document.getElementById('messageButton').classList.add('hidden');
+            } else {
+                document.getElementById('messageButton').classList.remove('hidden');
+                document.getElementById('messageButton').href = `messages.html?user=${user.fullName}`;
+            }
+            
+            // Load posts for this user
+            loadPosts(username);
+        }
+
+        // Load posts for a specific user
+        function loadPosts(username) {
+            const userPosts = posts.filter(post => post.username === username);
+            const postsTab = document.getElementById('postsTab');
+            postsTab.innerHTML = '';
+            
+            if (userPosts.length === 0) {
+                postsTab.innerHTML = `
+                    <div class="p-4 text-center text-gray-500">
+                        <p>No hay publicaciones para mostrar</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            userPosts.forEach(post => {
+                const postElement = document.createElement('article');
+                postElement.className = 'p-4 hover:bg-gray-900 hover:bg-opacity-30 transition cursor-pointer hover-card';
+                postElement.setAttribute('data-post-id', post.id);
+                
+                let postHTML = `
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0">
+                            <div class="w-10 h-10 rounded-full overflow-hidden bg-gray-700">
+                                <img src="${post.profilePic}" alt="${post.username}" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium text-white">${post.username}</span>
+                                    <span class="text-gray-400 text-sm ml-1">· ${post.time}</span>
+                                </div>
+                                <button class="text-gray-400 hover:text-white p-1">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="mt-2 text-white">
+                                <p>${formatContent(post.content)}</p>
+                            </div>
+                `;
+                
+                if (post.image) {
+                    postHTML += `
+                        <div class="mt-3">
+                            <img src="${post.image}" alt="Post image" class="w-full h-auto rounded-lg">
+                        </div>
+                    `;
+                }
+                
+                postHTML += `
+                            <div class="mt-3 flex space-x-6 text-gray-400 post-actions">
+                                <button class="flex items-center space-x-1 hover:text-red-500 like-btn" data-post-id="${post.id}">
+                                    <div class="p-1.5 rounded-full hover:bg-red-500 hover:bg-opacity-10">
+                                        <i class="${post.isLiked ? 'fas text-red-500' : 'far'} fa-heart"></i>
+                                    </div>
+                                    <span class="like-count">${post.likes}</span>
+                                </button>
+                                <button class="flex items-center space-x-1 hover:text-primary">
+                                    <div class="p-1.5 rounded-full hover:bg-blue-500 hover:bg-opacity-10">
+                                        <i class="far fa-comment"></i>
+                                    </div>
+                                    <span>${post.comments}</span>
+                                </button>
+                                <a href="messages.html?user=${post.username}" class="flex items-center space-x-1 hover:text-primary">
+                                    <div class="p-1.5 rounded-full hover:bg-blue-500 hover:bg-opacity-10">
+                                        <i class="far fa-envelope"></i>
+                                    </div>
+                                    <span>Mensaje</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                postElement.innerHTML = postHTML;
+                postsTab.appendChild(postElement);
+                
+                // Add event listener for like button
+                const likeBtn = postElement.querySelector('.like-btn');
+                likeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const postId = parseInt(this.getAttribute('data-post-id'));
+                    toggleLike(postId, this);
+                });
+            });
+        }
+
+        // Format content to make hashtags clickable
+        function formatContent(content) {
+            // Make hashtags clickable
+            content = content.replace(/#(\w+)/g, '<a href="discover.html?hashtag=$1" class="text-primary hover:underline">#$1</a>');
+            
+            return content;
+        }
+
+        // Toggle like
+        function toggleLike(postId, button) {
+            const post = posts.find(p => p.id === postId);
+            if (post) {
+                post.isLiked = !post.isLiked;
+                post.likes = post.isLiked ? post.likes + 1 : post.likes - 1;
+                
+                const heartIcon = button.querySelector('i');
+                const likeCount = button.querySelector('.like-count');
+                
+                if (post.isLiked) {
+                    heartIcon.classList.remove('far');
+                    heartIcon.classList.add('fas', 'text-red-500');
+                } else {
+                    heartIcon.classList.remove('fas', 'text-red-500');
+                    heartIcon.classList.add('far');
+                }
+                
+                likeCount.textContent = post.likes;
+            }
+        }
+
+        // Initialize
+        loadProfile();
+    </script>
+</body>
+</html>
+
