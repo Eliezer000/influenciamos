@@ -44,6 +44,35 @@
             background-color: rgba(13, 110, 253, 0.1);
             border-right: 3px solid #0D6EFD;
         }
+
+        /* Añadir estos estilos en la sección de estilos personalizados */
+        @media (max-width: 768px) {
+            #chatArea {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 50;
+                background-color: #1E1E2D;
+            }
+            
+            #chatMessages {
+                height: calc(100vh - 130px);
+            }
+            
+            /* Ajustes para la lista de conversaciones en móvil */
+            .conversation .flex-grow {
+                width: 100%;
+                max-width: calc(100% - 60px);
+            }
+            
+            /* Asegurar que el contenido principal tenga suficiente espacio en móvil */
+            main {
+                padding-top: 60px;
+                padding-bottom: 60px;
+            }
+        }
     </style>
 </head>
 <body class="bg-dark text-white min-h-screen flex">
@@ -97,7 +126,7 @@
                 <button id="menuToggle" class="text-white mr-4">
                     <i class="fas fa-bars"></i>
                 </button>
-                <img src="logo.png" alt="Influenciamos Logo" class="h-8">
+                <h1 class="text-lg font-bold">Mensajes</h1>
             </div>
             <a href="profile.html" class="w-8 h-8 rounded-full overflow-hidden bg-gray-700">
                 <img src="profile-pic.png" alt="Tu perfil" class="w-full h-full object-cover">
@@ -145,13 +174,21 @@
     </div>
 
     <!-- Main Content -->
-    <main class="flex-1 md:ml-64 min-h-screen flex flex-col md:flex-row">
+    <main class="flex-1 md:ml-64 min-h-screen flex flex-col md:flex-row pt-16 md:pt-0">
         <!-- Conversations List -->
-        <div class="w-full md:w-80 border-r border-gray-800 flex flex-col">
+        <div class="w-full md:w-80 border-r border-gray-800 flex flex-col" id="conversationsList-container">
             <!-- Messages Header -->
-            <div class="sticky top-0 z-10 bg-dark bg-opacity-90 backdrop-blur-sm border-b border-gray-800 p-4">
+            <div class="sticky top-0 z-10 bg-dark bg-opacity-90 backdrop-blur-sm border-b border-gray-800 p-4 md:block hidden">
                 <h1 class="text-xl font-bold">Mensajes</h1>
                 <div class="relative mt-3">
+                    <input type="text" placeholder="Buscar mensajes" class="w-full bg-gray-800 border-none rounded-full py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-1 focus:ring-primary">
+                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                </div>
+            </div>
+            
+            <!-- Mobile Search -->
+            <div class="p-4 md:hidden">
+                <div class="relative">
                     <input type="text" placeholder="Buscar mensajes" class="w-full bg-gray-800 border-none rounded-full py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-1 focus:ring-primary">
                     <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
                 </div>
@@ -174,7 +211,7 @@
         </div>
         
         <!-- Chat Area -->
-        <div id="chatArea" class="hidden md:flex flex-1 flex-col">
+        <div id="chatArea" class="hidden md:flex flex-1 flex-col w-full h-full absolute md:relative inset-0 bg-dark z-20">
             <!-- Empty State (shown when no conversation is selected) -->
             <div id="emptyState" class="flex-1 flex flex-col items-center justify-center p-8 text-center">
                 <div class="w-16 h-16 rounded-full bg-primary bg-opacity-10 flex items-center justify-center mb-4">
@@ -188,12 +225,12 @@
             </div>
             
             <!-- Conversation (hidden by default, shown when a conversation is selected) -->
-            <div id="conversation" class="hidden flex-1 flex flex-col">
+            <div id="conversation" class="hidden flex-1 flex flex-col h-full">
                 <!-- Chat Header -->
                 <div class="sticky top-0 z-10 bg-dark bg-opacity-90 backdrop-blur-sm border-b border-gray-800 p-4 flex items-center">
-                    <a href="#" class="md:hidden mr-3 text-gray-400">
+                    <button id="backToList" class="md:hidden mr-3 text-gray-400">
                         <i class="fas fa-arrow-left"></i>
-                    </a>
+                    </button>
                     <div class="flex items-center flex-1">
                         <div class="w-10 h-10 rounded-full overflow-hidden bg-gray-700 mr-3">
                             <img id="chatProfilePic" src="user1.png" alt="Perfil" class="w-full h-full object-cover">
@@ -393,16 +430,16 @@
                 conversationElement.setAttribute('data-conversation-id', conversation.id);
                 
                 conversationElement.innerHTML = `
-                    <div class="flex">
+                    <div class="flex w-full">
                         <div class="relative flex-shrink-0 mr-3">
                             <div class="w-12 h-12 rounded-full overflow-hidden">
                                 <img src="${conversation.profilePic}" alt="${conversation.username}" class="w-full h-full object-cover">
                             </div>
                             ${conversation.unread ? '<div class="absolute top-0 right-0 w-3 h-3 bg-primary rounded-full"></div>' : ''}
                         </div>
-                        <div class="flex-grow min-w-0">
-                            <div class="flex justify-between items-baseline">
-                                <div class="font-medium truncate">${conversation.username}</div>
+                        <div class="flex-grow min-w-0 w-full">
+                            <div class="flex justify-between items-baseline w-full">
+                                <div class="font-medium truncate max-w-[70%]">${conversation.username}</div>
                                 <div class="text-gray-500 text-xs">${conversation.time}</div>
                             </div>
                             <div class="text-gray-400 text-sm truncate">${conversation.lastMessage}</div>
@@ -453,10 +490,10 @@
             // Render messages
             renderMessages(conversation.messages);
             
-            // On mobile, hide conversations list and show chat
+            // On mobile, show chat area and hide conversations list
             if (window.innerWidth < 768) {
-                document.querySelector('.w-full.md\\:w-80').classList.add('hidden');
                 document.getElementById('chatArea').classList.remove('hidden');
+                document.getElementById('conversationsList-container').classList.add('hidden');
             }
         }
 
@@ -558,10 +595,9 @@
         });
 
         // Handle back button on mobile
-        document.querySelector('.fa-arrow-left').parentElement.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('.w-full.md\\:w-80').classList.remove('hidden');
+        document.getElementById('backToList').addEventListener('click', function() {
             document.getElementById('chatArea').classList.add('hidden');
+            document.getElementById('conversationsList-container').classList.remove('hidden');
         });
 
         // Check if we need to open a specific conversation from URL
